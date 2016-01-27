@@ -1,6 +1,3 @@
 /ThriftClient/build/
 /ThriftClient/dist/
-nbproject/private/
-dist/
-build/
-nbproject/UPDATED.TXT
+/ThriftClient/nbproject/private/
