@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 
 	"git.apache.org/thrift.git/lib/go/thrift"
 	"github.com/y-okubo/thrift-test/go/nekojarashi"
@@ -17,6 +18,14 @@ func runServer(transportFactory thrift.TTransportFactory, protocolFactory thrift
 	}
 	fmt.Printf("Transport: %T\n", transport)
 	handler := NewNekojarashiEngineHandler()
+
+	var i int32
+	var j int = 0
+	for i = 0; i < 50000; i++ {
+		handler.MapValue[strconv.Itoa(j)] = i
+		j++
+	}
+
 	processor := nekojarashi.NewNekojarashiEngineProcessor(handler)
 	server := thrift.NewTSimpleServer4(processor, transport, transportFactory, protocolFactory)
 

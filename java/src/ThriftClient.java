@@ -8,6 +8,8 @@ import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
+import java.util.*;
+import java.text.*;
 
 /**
  *
@@ -23,8 +25,6 @@ public class ThriftClient {
 
         // \src>javac com\nekojarashi\*.java -cp ..\lib\*;.
         // \src>java -classpath ..\lib\*;. com.nekojarashi.ThriftClient
-        ThriftServer.start();
-
         try {
             TTransport transport;
             transport = new TSocket("127.0.0.1", 9090);
@@ -33,7 +33,17 @@ public class ThriftClient {
             TProtocol protocol = new TBinaryProtocol(transport);
             NekojarashiEngine.Client client = new NekojarashiEngine.Client(protocol);
             client.backupStart();
+
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd (EE) HH:mm:ss.SSS zz");
+            // Date now = new Date();
+            // System.out.println(df.format(now));
+            long s = System.currentTimeMillis();
             BackupStatus status = client.backupStatus();
+            // now = new Date();
+            // System.out.println(df.format(now));
+            long e = System.currentTimeMillis();
+            System.out.println((e - s) + " ms");
+
             System.out.println(status.getShortValue());
             System.out.println(status.getIntValue());
             System.out.println(status.getLongValue());
@@ -42,7 +52,7 @@ public class ThriftClient {
             System.out.println(status.getStringValue());
             System.out.println(status.getListValue());
             System.out.println(status.getSetValue());
-//            System.out.println(status.getMapValue());
+            // System.out.println(status.getMapValue());
             System.out.println(status.getMapValue().size());
 
             transport.close();
