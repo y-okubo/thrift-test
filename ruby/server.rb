@@ -1,4 +1,4 @@
-$LOAD_PATH.push('gen-rb')
+$LOAD_PATH.push('thrift')
 $LOAD_PATH.unshift '../../lib/rb/lib'
 
 require 'thrift'

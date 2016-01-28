@@ -1,4 +1,5 @@
-namespace java com.nekojarashi.thrift
+// namespace java com.nekojarashi.thrift
+namespace java thrift.sample
 
 enum ClientType {
     WINDOWS,

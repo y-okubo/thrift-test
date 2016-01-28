@@ -1,6 +1,2 @@
-/ThriftClient/build/
-/ThriftClient/dist/
-/ThriftClient/nbproject/private/
-/java/build/
-/java/dist/
+*.class
 /java/nbproject/private/

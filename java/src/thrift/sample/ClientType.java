@@ -4,7 +4,7 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package com.nekojarashi.thrift;
+package thrift.sample;
 
 
 import java.util.Map;

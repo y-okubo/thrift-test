@@ -1,4 +1,4 @@
-$:.push('gen-rb')
+$:.push('thrift')
 $:.unshift '../../lib/rb/lib'
 
 require 'thrift'
