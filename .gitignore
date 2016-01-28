@@ -1,3 +1,6 @@
 /ThriftClient/build/
 /ThriftClient/dist/
 /ThriftClient/nbproject/private/
+/java/build/
+/java/dist/
+/java/nbproject/private/
