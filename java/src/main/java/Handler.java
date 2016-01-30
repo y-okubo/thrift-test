@@ -13,11 +13,11 @@ import java.util.List;
  *
  * @author y-okubo
  */
-public class AwesomeServiceHandler implements AwesomeService.Iface {
+public class Handler implements AwesomeService.Iface {
 
     private final HashMap<String, Integer> map;
 
-    public AwesomeServiceHandler() {
+    public Handler() {
         map = new HashMap<String, Integer>() {
             {
                 for (int i = 0; i < 50000; i++) {

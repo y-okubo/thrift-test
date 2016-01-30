@@ -15,7 +15,7 @@ import java.text.*;
  *
  * @author y-okubo
  */
-public class ThriftClient {
+public class Client {
 
     /**
      * @param args the command line arguments

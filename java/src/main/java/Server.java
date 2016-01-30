@@ -20,9 +20,9 @@ import org.apache.thrift.transport.TServerTransport;
  *
  * @author y-okubo
  */
-public class ThriftServer {
+public class Server {
 
-    public static AwesomeServiceHandler handler;
+    public static Handler handler;
 
     public static AwesomeService.Processor processor;
 
@@ -36,7 +36,7 @@ public class ThriftServer {
 
     public static void start() {
         try {
-            handler = new AwesomeServiceHandler();
+            handler = new Handler();
             processor = new AwesomeService.Processor(handler);
 
             Runnable simple = new Runnable() {
