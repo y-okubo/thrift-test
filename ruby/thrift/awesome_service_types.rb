@@ -6,14 +6,14 @@
 
 require 'thrift'
 
-module ClientType
+module SystemType
   WINDOWS = 0
   MAC_OS_X = 1
   VALUE_MAP = {0 => "WINDOWS", 1 => "MAC_OS_X"}
   VALID_VALUES = Set.new([WINDOWS, MAC_OS_X]).freeze
 end
 
-class BackupStatus
+class Types
   include ::Thrift::Struct, ::Thrift::Struct_Union
   SHORT_VALUE = 1
   INT_VALUE = 2

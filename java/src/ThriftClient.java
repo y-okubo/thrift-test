@@ -31,14 +31,14 @@ public class ThriftClient {
             transport.open();
 
             TProtocol protocol = new TBinaryProtocol(transport);
-            NekojarashiEngine.Client client = new NekojarashiEngine.Client(protocol);
-            client.backupStart();
+            AwesomeService.Client client = new AwesomeService.Client(protocol);
+            client.sayHello();
 
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd (EE) HH:mm:ss.SSS zz");
             // Date now = new Date();
             // System.out.println(df.format(now));
             long s = System.currentTimeMillis();
-            BackupStatus status = client.backupStatus();
+            Types status = client.listingTypes();
             // now = new Date();
             // System.out.println(df.format(now));
             long e = System.currentTimeMillis();

@@ -1,3 +1,3 @@
-thrift -r -out ruby/thrift --gen rb nekojarashi.thrift
-thrift -r -out java/src --gen java:fullcamel nekojarashi.thrift
-thrift -r -out go --gen go nekojarashi.thrift
+thrift -r -out ruby/thrift --gen rb awesome_service.thrift
+thrift -r -out java/src --gen java:fullcamel awesome_service.thrift
+thrift -r -out go --gen go awesome_service.thrift

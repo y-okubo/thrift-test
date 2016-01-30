@@ -13,11 +13,11 @@ import java.util.List;
  *
  * @author y-okubo
  */
-public class NekojarashiEngineHandler implements NekojarashiEngine.Iface {
+public class AwesomeServiceHandler implements AwesomeService.Iface {
 
     private final HashMap<String, Integer> map;
 
-    public NekojarashiEngineHandler() {
+    public AwesomeServiceHandler() {
         map = new HashMap<String, Integer>() {
             {
                 for (int i = 0; i < 50000; i++) {
@@ -31,13 +31,13 @@ public class NekojarashiEngineHandler implements NekojarashiEngine.Iface {
     }
 
     @Override
-    public void backupStart() throws org.apache.thrift.TException {
-        System.out.println("ping()");
+    public void sayHello() throws org.apache.thrift.TException {
+        System.out.println("Hello!");
     }
 
     @Override
-    public BackupStatus backupStatus() throws org.apache.thrift.TException {
-        BackupStatus status = new BackupStatus();
+    public Types listingTypes() throws org.apache.thrift.TException {
+        Types status = new Types();
         status.setShortValue(new Integer(10).shortValue());
         status.setIntValue(new Integer(10).shortValue());
         status.setLongValue(new Integer(10).shortValue());

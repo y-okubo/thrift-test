@@ -4,11 +4,11 @@
 package main
 
 import (
+	"awesome_service"
 	"flag"
 	"fmt"
 	"git.apache.org/thrift.git/lib/go/thrift"
 	"math"
-	"nekojarashi"
 	"net"
 	"net/url"
 	"os"
@@ -20,8 +20,8 @@ func Usage() {
 	fmt.Fprintln(os.Stderr, "Usage of ", os.Args[0], " [-h host:port] [-u url] [-f[ramed]] function [arg1 [arg2...]]:")
 	flag.PrintDefaults()
 	fmt.Fprintln(os.Stderr, "\nFunctions:")
-	fmt.Fprintln(os.Stderr, "  void backup_start()")
-	fmt.Fprintln(os.Stderr, "  BackupStatus backup_status()")
+	fmt.Fprintln(os.Stderr, "  void say_hello()")
+	fmt.Fprintln(os.Stderr, "  Types listing_types()")
 	fmt.Fprintln(os.Stderr)
 	os.Exit(0)
 }
@@ -109,27 +109,27 @@ func main() {
 		Usage()
 		os.Exit(1)
 	}
-	client := nekojarashi.NewNekojarashiEngineClientFactory(trans, protocolFactory)
+	client := awesome_service.NewAwesomeServiceClientFactory(trans, protocolFactory)
 	if err := trans.Open(); err != nil {
 		fmt.Fprintln(os.Stderr, "Error opening socket to ", host, ":", port, " ", err)
 		os.Exit(1)
 	}
 
 	switch cmd {
-	case "backup_start":
+	case "say_hello":
 		if flag.NArg()-1 != 0 {
-			fmt.Fprintln(os.Stderr, "BackupStart requires 0 args")
+			fmt.Fprintln(os.Stderr, "SayHello requires 0 args")
 			flag.Usage()
 		}
-		fmt.Print(client.BackupStart())
+		fmt.Print(client.SayHello())
 		fmt.Print("\n")
 		break
-	case "backup_status":
+	case "listing_types":
 		if flag.NArg()-1 != 0 {
-			fmt.Fprintln(os.Stderr, "BackupStatus requires 0 args")
+			fmt.Fprintln(os.Stderr, "ListingTypes requires 0 args")
 			flag.Usage()
 		}
-		fmt.Print(client.BackupStatus())
+		fmt.Print(client.ListingTypes())
 		fmt.Print("\n")
 		break
 	case "":

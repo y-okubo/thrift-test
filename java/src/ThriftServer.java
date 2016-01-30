@@ -22,9 +22,9 @@ import org.apache.thrift.transport.TServerTransport;
  */
 public class ThriftServer {
 
-    public static NekojarashiEngineHandler handler;
+    public static AwesomeServiceHandler handler;
 
-    public static NekojarashiEngine.Processor processor;
+    public static AwesomeService.Processor processor;
 
     /**
      * @param args the command line arguments
@@ -36,8 +36,8 @@ public class ThriftServer {
 
     public static void start() {
         try {
-            handler = new NekojarashiEngineHandler();
-            processor = new NekojarashiEngine.Processor(handler);
+            handler = new AwesomeServiceHandler();
+            processor = new AwesomeService.Processor(handler);
 
             Runnable simple = new Runnable() {
                 public void run() {
@@ -50,7 +50,7 @@ public class ThriftServer {
         }
     }
 
-    public static void simple(NekojarashiEngine.Processor processor) {
+    public static void simple(AwesomeService.Processor processor) {
         try {
             TServerTransport serverTransport = new TServerSocket(new InetSocketAddress("127.0.0.1", 9090));
             TServer server = new TSimpleServer(new TServer.Args(serverTransport).processor(processor));

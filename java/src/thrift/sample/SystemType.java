@@ -11,13 +11,13 @@ import java.util.Map;
 import java.util.HashMap;
 import org.apache.thrift.TEnum;
 
-public enum ClientType implements org.apache.thrift.TEnum {
+public enum SystemType implements org.apache.thrift.TEnum {
   WINDOWS(0),
   MAC_OS_X(1);
 
   private final int value;
 
-  private ClientType(int value) {
+  private SystemType(int value) {
     this.value = value;
   }
 
@@ -32,7 +32,7 @@ public enum ClientType implements org.apache.thrift.TEnum {
    * Find a the enum type by its integer value, as defined in the Thrift IDL.
    * @return null if the value is not found.
    */
-  public static ClientType findByValue(int value) { 
+  public static SystemType findByValue(int value) { 
     switch (value) {
       case 0:
         return WINDOWS;

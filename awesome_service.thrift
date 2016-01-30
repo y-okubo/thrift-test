@@ -1,12 +1,12 @@
 // namespace java com.nekojarashi.thrift
 namespace java thrift.sample
 
-enum ClientType {
+enum SystemType {
     WINDOWS,
     MAC_OS_X
 }
 
-struct BackupStatus {
+struct Types {
   1: required i16 short_value;
   2: required i32 int_value;
   3: required i64 long_value;
@@ -18,7 +18,7 @@ struct BackupStatus {
   9: optional map<string, i32> map_value;
 }
 
-service NekojarashiEngine {
-  void backup_start(),
-  BackupStatus backup_status()
+service AwesomeService {
+  void say_hello(),
+  Types listing_types()
 }

@@ -2,35 +2,35 @@ package main
 
 import "fmt"
 
-import "github.com/y-okubo/thrift-test/go/nekojarashi"
+import "github.com/y-okubo/thrift-test/go/awesome_service"
 
-type NekojarashiEngineHandler struct {
+type AwesomeServiceHandler struct {
 	MapValue map[string]int32
 }
 
-func NewNekojarashiEngineHandler() *NekojarashiEngineHandler {
-	return &NekojarashiEngineHandler{MapValue: make(map[string]int32)}
+func NewAwesomeServiceHandler() *AwesomeServiceHandler {
+	return &AwesomeServiceHandler{MapValue: make(map[string]int32)}
 }
 
-func (p *NekojarashiEngineHandler) BackupStart() (err error) {
-	fmt.Print("ping()\n")
+func (p *AwesomeServiceHandler) SayHello() (err error) {
+	fmt.Print("Hello!()\n")
 	return nil
 }
 
-func (p *NekojarashiEngineHandler) BackupStatus() (status *nekojarashi.BackupStatus, err error) {
-	status = nekojarashi.NewBackupStatus()
+func (p *AwesomeServiceHandler) ListingTypes() (types *awesome_service.Types, err error) {
+	types = awesome_service.NewTypes()
 	var f float64 = 100
 	var b bool = false
 	var s string = "のまねこ"
-	status.ShortValue = 100
-	status.IntValue = 100
-	status.LongValue = 100
-	status.DoubleValue = &f
-	status.BoolValue = &b
-	status.StringValue = &s
-	status.ListValue = []string{"a", "b", "c", "d"}
-	status.SetValue = map[string]bool{"go": true, "rb": false, "js": true}
-	status.MapValue = p.MapValue
+	types.ShortValue = 100
+	types.IntValue = 100
+	types.LongValue = 100
+	types.DoubleValue = &f
+	types.BoolValue = &b
+	types.StringValue = &s
+	types.ListValue = []string{"a", "b", "c", "d"}
+	types.SetValue = map[string]bool{"go": true, "rb": false, "js": true}
+	types.MapValue = p.MapValue
 
-	return status, nil
+	return types, nil
 }

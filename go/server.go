@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"git.apache.org/thrift.git/lib/go/thrift"
-	"github.com/y-okubo/thrift-test/go/nekojarashi"
+	"github.com/y-okubo/thrift-test/go/awesome_service"
 )
 
 func runServer(transportFactory thrift.TTransportFactory, protocolFactory thrift.TProtocolFactory, addr string, secure bool) error {
@@ -17,7 +17,7 @@ func runServer(transportFactory thrift.TTransportFactory, protocolFactory thrift
 		return err
 	}
 	fmt.Printf("Transport: %T\n", transport)
-	handler := NewNekojarashiEngineHandler()
+	handler := NewAwesomeServiceHandler()
 
 	var i int32
 	var j int = 0
@@ -26,7 +26,7 @@ func runServer(transportFactory thrift.TTransportFactory, protocolFactory thrift
 		j++
 	}
 
-	processor := nekojarashi.NewNekojarashiEngineProcessor(handler)
+	processor := awesome_service.NewAwesomeServiceProcessor(handler)
 	server := thrift.NewTSimpleServer4(processor, transport, transportFactory, protocolFactory)
 
 	fmt.Println("Starting the simple server... on ", addr)

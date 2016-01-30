@@ -5,5 +5,5 @@
 #
 
 require 'thrift'
-require 'nekojarashi_types'
+require 'awesome_service_types'
 
