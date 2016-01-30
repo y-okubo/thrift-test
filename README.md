@@ -1,46 +1,45 @@
-# How to use
-## Prepare
-### Microsoft Windows
-
-`generate.bat`
-
-### Apple OS X
-
-`./generate.sh`
-
-## Ruby
-
+# Ruby
+## Server
 ```
 cd ruby
 ruby server.rb
+```
+
+## Client
+```
+cd ruby
 ruby client.rb
 ```
 
-## Java
-### Microsoft Windows
-
+# Java
+## Server
 ```
-cd java/src
-javac ThriftServer.java -cp ../lib/*;.
-java -classpath ../lib/*;. ThriftServer
-javac ThriftClient.java -cp ../lib/*;.
-java -classpath ../lib/*;. ThriftClient
+cd java
+mvn compile && mvn exec:java -Dexec.mainClass=Server
 ```
 
-### Apple OS X
-
+## Client
 ```
-cd java/src
-javac -classpath ../lib/*:. ThriftServer.java
-java -classpath ../lib/*:. ThriftServer
-javac -classpath ../lib/*:. ThriftClient.java
-java -classpath ../lib/*:. ThriftClient
+cd java
+mvn compile && mvn exec:java -Dexec.mainClass=Client
 ```
-
-
 
 # Go
+## Server
+```
+cd go
+go run ./server/*.go
+```
 
+## Client
 ```
-go run ./go/*.go
+cd go
+go run ./client/*.go
 ```
+
+# Generate (Not Required)
+## Microsoft Windows
+`generate.bat`
+
+## Apple OS X
+`./generate.sh`
