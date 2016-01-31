@@ -10,6 +10,8 @@ import (
 	"github.com/y-okubo/thrift-test/go/awesome_service"
 )
 
+var SharedTypes *awesome_service.Types
+
 func runServer(transportFactory thrift.TTransportFactory, protocolFactory thrift.TProtocolFactory, addr string, secure bool) error {
 	var transport thrift.TServerTransport
 	var err error
@@ -18,13 +20,25 @@ func runServer(transportFactory thrift.TTransportFactory, protocolFactory thrift
 		return err
 	}
 	fmt.Printf("Transport: %T\n", transport)
+
 	handler := NewAwesomeServiceHandler()
 
-	var i int32
-	var j int = 0
-	for i = 0; i < 50000; i++ {
-		handler.MapValue[strconv.Itoa(j)] = i
-		j++
+	SharedTypes = awesome_service.NewTypes()
+	var f float64 = 1
+	b := true
+	s := "A"
+	SharedTypes.ShortValue = 1
+	SharedTypes.IntValue = 1
+	SharedTypes.LongValue = 1
+	SharedTypes.DoubleValue = &f
+	SharedTypes.BoolValue = &b
+	SharedTypes.StringValue = &s
+	SharedTypes.ListValue = []string{"A"}
+	SharedTypes.SetValue = map[string]bool{"A": true}
+	SharedTypes.MapValue = make(map[string]int32)
+	// var i int32
+	for i := 0; i < 50000; i++ {
+		SharedTypes.MapValue[strconv.Itoa(i)] = int32(i)
 	}
 
 	processor := awesome_service.NewAwesomeServiceProcessor(handler)
@@ -34,16 +48,16 @@ func runServer(transportFactory thrift.TTransportFactory, protocolFactory thrift
 	return server.Serve()
 }
 
-func Usage() {
+func usage() {
 	fmt.Fprint(os.Stderr, "Usage of ", os.Args[0], ":\n")
 	flag.PrintDefaults()
 	fmt.Fprint(os.Stderr, "\n")
 }
 
 func main() {
-	flag.Usage = Usage
+	flag.Usage = usage
 	// server := flag.Bool("server", false, "Run server")
-	protocol := flag.String("P", "binary", "Specify the protocol (binary, compact, json, simplejson)")
+	protocol := flag.String("P", "json", "Specify the protocol (binary, compact, json, simplejson)")
 	framed := flag.Bool("framed", false, "Use framed transport")
 	buffered := flag.Bool("buffered", false, "Use buffered transport")
 	addr := flag.String("addr", "127.0.0.1:9090", "Address to listen to")
@@ -63,7 +77,7 @@ func main() {
 		protocolFactory = thrift.NewTBinaryProtocolFactoryDefault()
 	default:
 		fmt.Fprint(os.Stderr, "Invalid protocol specified", protocol, "\n")
-		Usage()
+		usage()
 		os.Exit(1)
 	}
 

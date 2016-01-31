@@ -9,7 +9,7 @@ begin
   port = ARGV[0] || 9090
 
   transport = Thrift::BufferedTransport.new(Thrift::Socket.new('127.0.0.1', 9090))
-  protocol = Thrift::BinaryProtocol.new(transport)
+  protocol = Thrift::JsonProtocol.new(transport)
   client = AwesomeService::Client.new(protocol)
 
   transport.open()
@@ -17,8 +17,14 @@ begin
   client.say_hello()
   print "say_hello()\n"
 
-  types = client.listing_types()
-  puts types.short_value
+  avg = 0
+  10.times {
+    start_time = Time.now
+    types = client.listing_types()
+    puts Time.now - start_time
+    avg += Time.now - start_time
+  }
+  puts "Average: #{avg / 10}"
 
   transport.close()
 

@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"time"
 
 	"git.apache.org/thrift.git/lib/go/thrift"
 	"github.com/y-okubo/thrift-test/go/awesome_service"
@@ -11,6 +12,19 @@ import (
 
 func handleClient(client *awesome_service.AwesomeServiceClient) (err error) {
 	client.SayHello()
+
+	var avg time.Duration
+	for i := 0; i < 10; i++ {
+		t1 := time.Now()
+		client.ListingTypes()
+		t2 := time.Now()
+		fmt.Println(t2.Sub(t1))
+		avg = avg + t2.Sub(t1)
+	}
+
+	fmt.Print("Average: ")
+	fmt.Println(avg / 10)
+
 	return nil
 }
 
@@ -33,16 +47,16 @@ func runClient(transportFactory thrift.TTransportFactory, protocolFactory thrift
 	return handleClient(awesome_service.NewAwesomeServiceClientFactory(transport, protocolFactory))
 }
 
-func Usage() {
+func usage() {
 	fmt.Fprint(os.Stderr, "Usage of ", os.Args[0], ":\n")
 	flag.PrintDefaults()
 	fmt.Fprint(os.Stderr, "\n")
 }
 
 func main() {
-	flag.Usage = Usage
+	flag.Usage = usage
 	// server := flag.Bool("server", false, "Run server")
-	protocol := flag.String("P", "binary", "Specify the protocol (binary, compact, json, simplejson)")
+	protocol := flag.String("P", "json", "Specify the protocol (binary, compact, json, simplejson)")
 	framed := flag.Bool("framed", false, "Use framed transport")
 	buffered := flag.Bool("buffered", false, "Use buffered transport")
 	addr := flag.String("addr", "127.0.0.1:9090", "Address to listen to")
@@ -62,7 +76,7 @@ func main() {
 		protocolFactory = thrift.NewTBinaryProtocolFactoryDefault()
 	default:
 		fmt.Fprint(os.Stderr, "Invalid protocol specified", protocol, "\n")
-		Usage()
+		usage()
 		os.Exit(1)
 	}
 
